@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Música Romântica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--<img id="muita" src="var_muitos.gif" >-->
+    <div class="container">
+      
+        <div class="content">
+          <img id="rosa" src="./rosa.gif">
+            <h1 id="lovePhrase">Frase de Amor Aqui</h1>
+          <!--<button onclick="voltar()">Voltar</button>-->
+        </div>
+    </div>
+
+    <script>
+const lovePhrases = [
+    "Você é a razão do meu sorriso.",
+    "Meu coração bate mais forte por você.",
+    "Cada momento ao seu lado é mágico.",
+    "Você me completa de uma forma única.",
+    "Meu amor por você é infinito.",
+    "Seu abraço é o meu lugar favorito.",
+    "Você é a minha pessoa especial."
+];
+
+let currentIndex = 0;
+const phraseElement = document.getElementById('lovePhrase');
+
+function fadeOut() {
+    let opacity = 1;
+    let position = 0;
+    const fadeEffect = setInterval(() => {
+        if (opacity <= 0.1) {
+            clearInterval(fadeEffect);
+            showNextPhrase();
+        }
+        phraseElement.style.opacity = opacity;
+        phraseElement.style.transform = `translateX(${position}px)`;
+        opacity -= 0.1;
+        position += 10;
+    }, 100);
+}
+
+function showNextPhrase() {
+    currentIndex = (currentIndex + 1) % lovePhrases.length;
+    phraseElement.textContent = lovePhrases[currentIndex];
+    fadeIn();
+}
+
+function fadeIn() {
+    let opacity = 0;
+    let position = -100;
+    const fadeEffect = setInterval(() => {
+        if (opacity >= 1) {
+            clearInterval(fadeEffect);
+        }
+        phraseElement.style.opacity = opacity;
+        phraseElement.style.transform = `translateX(${position}px)`;
+        opacity += 0.1;
+        position += 10;
+    }, 100);
+}
+
+
+
+// Mostrar a primeira frase inicialmente
+phraseElement.textContent = lovePhrases[currentIndex];
+fadeIn();
+
+// Trocar as frases a cada 2 segundos
+setInterval(fadeOut, 2500);
+
+function voltar() {
+    window.location.href = 'index.html';
+}
+
+
+
+  </script>
+</body>
+</html>
